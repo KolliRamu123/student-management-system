@@ -28,19 +28,18 @@ public class StudentServiceImpl implements StudentService{
 		// TODO Auto-generated method stub
 		Student updateStudent=studentRepository.findById(studentId)
 				.orElseThrow(()->new StudentNotFoundException("StudentId not Found with "+studentId));
-		updateStudent.setStudentName(updateStudent.getStudentName());
-		updateStudent.setAddress(updateStudent.getAddress());
-		updateStudent.setAdmissionDate(updateStudent.getAdmissionDate());
-		updateStudent.setAge(updateStudent.getAge());
-		updateStudent.setContactNumber(updateStudent.getContactNumber());
-		updateStudent.setCourse(updateStudent.getCourse());
-		updateStudent.setEmail(updateStudent.getEmail());
-		updateStudent.setDepartment(updateStudent.getDepartment());
-		updateStudent.setYearOfStudy(updateStudent.getYearOfStudy());
-		updateStudent.setGender(updateStudent.getGender());
-		updateStudent.setRollNumber(updateStudent.getRollNumber());
-		studentRepository.save(updateStudent);
-		return updateStudent;
+		updateStudent.setStudentName(student.getStudentName());
+		updateStudent.setAddress(student.getAddress());
+		updateStudent.setAdmissionDate(student.getAdmissionDate());
+		updateStudent.setAge(student.getAge());
+		updateStudent.setContactNumber(student.getContactNumber());
+		updateStudent.setCourse(student.getCourse());
+		updateStudent.setEmail(student.getEmail());
+		updateStudent.setDepartment(student.getDepartment());
+		updateStudent.setYearOfStudy(student.getYearOfStudy());
+		updateStudent.setGender(student.getGender());
+		updateStudent.setRollNumber(student.getRollNumber());
+		return studentRepository.save(updateStudent);
 	}
 
 	@Override
