@@ -35,7 +35,7 @@ git push -u origin ramu
 ![alt text](image-4.png)
 12.Now drop down and select the squash and merge.
 ![alt text](image-5.png)
-13. Now we have successfully merge the changes to the main branch
+13.Now we have successfully merge the changes to the main branch
 
 ## Nareshs Work
 
