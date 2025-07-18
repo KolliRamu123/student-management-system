@@ -1,5 +1,6 @@
 package com.sms.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,6 +26,7 @@ public class Student {
 	private String course;
 	private String department;
 	private int yearOfStudy;
+	@Column(unique = true, updatable = false, nullable = false)
 	private String rollNumber;
 	private String admissionDate;
 

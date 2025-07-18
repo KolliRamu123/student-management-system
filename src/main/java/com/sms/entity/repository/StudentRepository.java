@@ -5,7 +5,10 @@ import org.springframework.stereotype.Repository;
 
 import com.sms.entity.Student;
 
+
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Long> {
+
+	boolean existsByRollNumber(String rollNumber);
 
 }
