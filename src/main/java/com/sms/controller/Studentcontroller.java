@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sms.entity.Student;
 import com.sms.entity.exception.StudentNotFoundException;
+import com.sms.entity.exception.StudentRollNoAlreadyExistsException;
 import com.sms.service.StudentService;
 
 @RestController
@@ -23,10 +24,9 @@ public class Studentcontroller {
 	private StudentService studentservice;
 	
 	@PostMapping("/addstudent")
-	public ResponseEntity<Student>addStudent(@RequestBody Student student){
+	public ResponseEntity<Student>addStudent(@RequestBody Student student) throws StudentRollNoAlreadyExistsException{
 		Student add=studentservice.addStudent(student);
 		return new ResponseEntity<Student>(add, HttpStatus.OK);
-		
 	}
 	@GetMapping("/getstudents")
 	public ResponseEntity<List<Student>>getstudent(){
