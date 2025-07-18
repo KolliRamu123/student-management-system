@@ -17,4 +17,12 @@ public class GlobalHandler {
 		return new ResponseEntity<ErrorResponse>(response, HttpStatus.NOT_FOUND);
 	}
 
+	@ExceptionHandler(StudentRollNoAlreadyExistsException.class)
+	public ResponseEntity<ErrorResponse> stundentRollNoAlreadyExistsException(StudentRollNoAlreadyExistsException ex,
+			WebRequest request) {
+		ErrorResponse response = new ErrorResponse(new Date(), ex.getMessage(), request.getDescription(false));
+		return new ResponseEntity<ErrorResponse>(response, HttpStatus.CONFLICT);
+
+	}
+
 }

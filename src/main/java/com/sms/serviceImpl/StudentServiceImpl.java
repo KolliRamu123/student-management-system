@@ -7,27 +7,31 @@ import org.springframework.stereotype.Service;
 
 import com.sms.entity.Student;
 import com.sms.entity.exception.StudentNotFoundException;
+import com.sms.entity.exception.StudentRollNoAlreadyExistsException;
 import com.sms.entity.repository.StudentRepository;
 import com.sms.service.StudentService;
 
 @Service
-public class StudentServiceImpl implements StudentService{
-    
+public class StudentServiceImpl implements StudentService {
+
 	@Autowired
 	private StudentRepository studentRepository;
-	
+
 	@Override
-	public Student addStudent(Student student) {
-		// TODO Auto-generated method stub
-		Student save=studentRepository.save(student);
-		return save;
+	public Student addStudent(Student student) throws StudentRollNoAlreadyExistsException {
+		if (studentRepository.existsByRollNumber(student.getRollNumber())) {
+			throw new StudentRollNoAlreadyExistsException("Student Already Exists");
+		} else {
+			Student save = studentRepository.save(student);
+			return save;
+		}
 	}
 
 	@Override
 	public Student updateStudent(long studentId, Student student) throws StudentNotFoundException {
 		// TODO Auto-generated method stub
-		Student updateStudent=studentRepository.findById(studentId)
-				.orElseThrow(()->new StudentNotFoundException("StudentId not Found with "+studentId));
+		Student updateStudent = studentRepository.findById(studentId)
+				.orElseThrow(() -> new StudentNotFoundException("StudentId not Found with " + studentId));
 		updateStudent.setStudentName(student.getStudentName());
 		updateStudent.setAddress(student.getAddress());
 		updateStudent.setAdmissionDate(student.getAdmissionDate());
@@ -45,25 +49,25 @@ public class StudentServiceImpl implements StudentService{
 	@Override
 	public Student getStudent(long studentId) throws StudentNotFoundException {
 		// TODO Auto-generated method stub
-		Student getStudent=studentRepository.findById(studentId)
-				.orElseThrow(()->new StudentNotFoundException("StudentId not Found with "+studentId));
-	    
+		Student getStudent = studentRepository.findById(studentId)
+				.orElseThrow(() -> new StudentNotFoundException("StudentId not Found with " + studentId));
+
 		return getStudent;
 	}
 
 	@Override
 	public String removeStudent(long studentId) throws StudentNotFoundException {
 		// TODO Auto-generated method stub
-		Student removeStudent=studentRepository.findById(studentId)
-				.orElseThrow(()->new StudentNotFoundException("StudentId not Found with "+studentId));
-	    studentRepository.delete(removeStudent);
+		Student removeStudent = studentRepository.findById(studentId)
+				.orElseThrow(() -> new StudentNotFoundException("StudentId not Found with " + studentId));
+		studentRepository.delete(removeStudent);
 		return "Student deleted Successfully..!!";
 	}
 
 	@Override
 	public List<Student> getAllStudents() {
 		// TODO Auto-generated method stub
-		List<Student> getAllStudents=studentRepository.findAll();
+		List<Student> getAllStudents = studentRepository.findAll();
 		return getAllStudents;
 	}
 
