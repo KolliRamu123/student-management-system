@@ -18,8 +18,8 @@ public class StudentServiceImpl implements StudentService {
 	private StudentRepository studentRepository;
 
 	@Override
-	public Student addStudent(Student student) throws StudentRollNoAlreadyExistsException {
-		if (studentRepository.existsByRollNumber(student.getRollNumber())) {
+	public Student addStudent(Student student) throws StudentRollNoAlreadyExistsExceptio
+		if (studentRepository.existsByRollNumber(student.getRollNumber().trim())) {
 			throw new StudentRollNoAlreadyExistsException("Student Already Exists");
 		} else {
 			Student save = studentRepository.save(student);
